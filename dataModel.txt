@@ -34,3 +34,22 @@ customer
 -customer_address
 -phone
 
+order_details
+-id
+-order_no
+-order_discount
+-order_date
+-order_total
+
+order_items
+-id 
+-order_details_id
+-item_code
+-item_name
+-item_price
+-item_discount
+-quantity  
+-total 
+
+
+

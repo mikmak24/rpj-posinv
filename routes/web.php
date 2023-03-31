@@ -17,7 +17,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-            
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SalesController;
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -47,10 +49,16 @@ Route::post('user-profile', [ProfileController::class, 'update'])->middleware('a
 
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('items', function () {
-		return view('pages.items');
-	})->name('items');
+	//Get All Items
+	Route::get('/items', [ItemController::class, 'index'])->name('items');
+	Route::post('/create-items', [ItemController::class, 'create'])->name('/create-items');
 
+
+	Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+	Route::post('/create-categories', [CategoryController::class, 'create'])->name('/create-categories');
+
+	Route::get('/sales', [SalesController::class, 'index'])->name('sales');
+	Route::post('/create-categories', [CategoryController::class, 'create'])->name('/create-categories');
 
 
 
