@@ -3,6 +3,10 @@ var __webpack_exports__ = {};
 /*!*******************************!*\
   !*** ./resources/js/sales.js ***!
   \*******************************/
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 $(document).ready(function () {
   var total = 0;
   var itemsOrdered = [];
@@ -116,6 +120,33 @@ $(document).ready(function () {
       $("#payment_change_error").show();
     }
     $('#payment_change').val(change);
+  });
+  $('#bill').click(function () {
+    var _paymentData;
+    var paymentData = (_paymentData = {
+      "payment_change": $('#payment_change').val(),
+      "payment_amount": $('#payment_amount').val()
+    }, _defineProperty(_paymentData, "payment_amount", $('#payment_amount').val()), _defineProperty(_paymentData, "order_no", $('#order_no').val()), _defineProperty(_paymentData, "order_date", $('#order_date').val()), _defineProperty(_paymentData, "order_total", $('#order_total').val()), _defineProperty(_paymentData, "order_discount", $('#order_discount').val()), _paymentData);
+    var data = {
+      array1: itemsOrdered,
+      array2: paymentData
+    };
+    $.ajax({
+      url: "/create-sales",
+      type: 'POST',
+      dataType: 'json',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function success(response) {
+        console.log(response);
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus + ': ' + errorThrown);
+      }
+    });
   });
 });
 /******/ })()

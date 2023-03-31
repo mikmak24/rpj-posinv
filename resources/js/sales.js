@@ -145,5 +145,43 @@ $(document).ready(function() {
 
     });
 
+    $('#bill').click(function() {
+
+        var paymentData = {
+            "payment_change":  $('#payment_change').val(),
+            "payment_amount":  $('#payment_amount').val(),
+            "payment_amount":  $('#payment_amount').val(),
+            "order_no":  $('#order_no').val(),
+            "order_date":  $('#order_date').val(),
+            "order_total":  $('#order_total').val(),
+            "order_discount":  $('#order_discount').val(),
+        };
+
+        var data = {
+            array1: itemsOrdered,
+            array2: paymentData
+        };
+
+
+
+
+          $.ajax({
+            url: "/create-sales",
+            type: 'POST',
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+              console.log(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus + ': ' + errorThrown);
+            }
+          });
+
+    });
+
+
         
 });

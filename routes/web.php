@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/create-categories', [CategoryController::class, 'create'])->name('/create-categories');
 
 	Route::get('/sales', [SalesController::class, 'index'])->name('sales');
-	Route::post('/create-categories', [CategoryController::class, 'create'])->name('/create-categories');
+	Route::post('/create-sales', [SalesController::class, 'create'])->name('/create-sales');
 
 
 

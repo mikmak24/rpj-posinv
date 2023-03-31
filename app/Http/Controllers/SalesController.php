@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Log;
 
 class SalesController extends Controller
 {
@@ -18,6 +19,12 @@ class SalesController extends Controller
 
         $items =  $this->item->getAllItems();
         return view('pages/sales')->with('items', $items);
+    }
 
+    public function create(Request $request) {
+
+        Log::alert('YOHOOOO');
+        Log::alert($request);
+        
     }
 }

@@ -136,9 +136,10 @@
 
                             <h6 class="mb-0 ">Payment Change: <input type="text" class="form-control border border-2 p-2"  id="payment_change"></h6>
                             <hr class="dark horizontal">
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
 
                             <div class=" me-3 my-3 text-end">
-                                <button id="proceed" class="btn bg-gradient-dark mb-0" href="javascript:;">
+                                <button id="bill" class="btn bg-gradient-dark mb-0" href="javascript:;">
                                     <i class="material-icons text-sm">arrow_forward</i>&nbsp;&nbsp;Bill
                                 </button>
                             </div>
