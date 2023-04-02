@@ -149,12 +149,10 @@ $(document).ready(function () {
           data: JSON.stringify(data),
           contentType: 'application/json',
           success: function success(response) {
-            $('html, body').animate({
-              scrollTop: 0
-            }, 'slow');
+            $('html, body').scrollTop(0);
             setTimeout(function () {
               location.reload();
-            }, 3000);
+            }, 2000);
             $("#div-success").show();
           },
           error: function error(jqXHR, textStatus, errorThrown) {

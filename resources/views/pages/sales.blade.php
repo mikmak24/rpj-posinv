@@ -14,15 +14,6 @@
                                 </div>
                             </div>
 
-                            <div style="display: none;" id="div-success" class="container alert alert-success alert-dismissible text-white mt-2 pl-10" role="alert">
-                                <span class="text-sm">New Order has been added! </span>
-                                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                            </div>
-
-
                             <div class=" me-3 my-3 text-end">
                             <a class="btn bg-gradient-dark mb-0 " data-bs-toggle="modal" data-bs-target="#exampleModal" href="javascript:;">
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Items
@@ -116,11 +107,19 @@
                 <div class="col-lg-4 col-md-6 mt-4 mb-4" style="display: none;" id="payment_summary">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-success shadow-primary border-radius-lg py-3 pe-1">
+                            <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
                             <h5 class="text-white text-capitalize ps-3"> Payment Summary:</h5>
                             </div>
                         </div>
                         <div class="card-body">
+                        <div style="display: none;" id="div-success" class="container alert alert-success alert-dismissible text-white  pl-10" role="alert">
+                                <span class="text-sm">New Order has been added! Reloading the page...</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+
                             <h6 class="mb-0 ">Order No: <input id="order_no" type="text" readonly class="form-control border border-2 p-2" ></h6>
                             <hr class="dark horizontal">
 

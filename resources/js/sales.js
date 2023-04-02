@@ -182,11 +182,11 @@ $(document).ready(function() {
                     contentType: 'application/json',
                     success: function(response) {
 
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        $('html, body').scrollTop(0);
 
                     setTimeout(function() {
                         location.reload();
-                    }, 3000);
+                    }, 2000);
 
                     $("#div-success").show();
 
