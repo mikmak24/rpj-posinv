@@ -20,6 +20,8 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\OrdersController;
+
 
 Route::get('/', function () {
 	return redirect('sign-in');
@@ -59,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 	Route::post('/create-sales', [SalesController::class, 'create'])->name('/create-sales');
+
+	Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
 
 
 

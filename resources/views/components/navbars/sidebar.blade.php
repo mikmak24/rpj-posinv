@@ -55,6 +55,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'orders' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('orders') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">shopping_basket</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'items' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('items') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

@@ -34,16 +34,19 @@ customer
 -customer_address
 -phone
 
-order_details
+orders
 -id
 -order_no
 -order_discount
 -order_date
 -order_total
+-payment_method
+-payment_amount
+-payment_change
 
 order_items
 -id 
--order_details_id
+-order_id
 -item_code
 -item_name
 -item_price

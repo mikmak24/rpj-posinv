@@ -131,20 +131,37 @@ $(document).ready(function () {
       array1: itemsOrdered,
       array2: paymentData
     };
-    $.ajax({
-      url: "/create-sales",
-      type: 'POST',
-      dataType: 'json',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      success: function success(response) {
-        console.log(response);
-      },
-      error: function error(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus + ': ' + errorThrown);
+    swal({
+      title: "Are you sure want to bill this order?",
+      text: "Please review the added items.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(function (willAdd) {
+      if (willAdd) {
+        $.ajax({
+          url: "/create-sales",
+          type: 'POST',
+          dataType: 'json',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          success: function success(response) {
+            $('html, body').animate({
+              scrollTop: 0
+            }, 'slow');
+            setTimeout(function () {
+              location.reload();
+            }, 3000);
+            $("#div-success").show();
+          },
+          error: function error(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ': ' + errorThrown);
+            console.log('HEYEYEYEYEYEYEYEY');
+          }
+        });
       }
     });
   });

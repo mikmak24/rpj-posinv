@@ -146,7 +146,7 @@ $(document).ready(function() {
     });
 
     $('#bill').click(function() {
-
+    
         var paymentData = {
             "payment_change":  $('#payment_change').val(),
             "payment_amount":  $('#payment_amount').val(),
@@ -162,24 +162,42 @@ $(document).ready(function() {
             array2: paymentData
         };
 
+     
+        swal({
+            title: `Are you sure want to bill this order?`,
+            text: "Please review the added items.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willAdd) => {
+              if (willAdd) {
 
+                $.ajax({
+                    url: "/create-sales",
+                    type: 'POST',
+                    dataType: 'json',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function(response) {
 
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
 
-          $.ajax({
-            url: "/create-sales",
-            type: 'POST',
-            dataType: 'json',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            success: function(response) {
-              console.log(response);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              console.log(textStatus + ': ' + errorThrown);
-            }
-          });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
 
+                    $("#div-success").show();
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                      console.log(textStatus + ': ' + errorThrown);
+                      console.log('HEYEYEYEYEYEYEYEY')
+                    }
+                });    
+              }
+            });
     });
 
 
