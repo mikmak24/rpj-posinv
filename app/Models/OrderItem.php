@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Item;
-use Log;
+use DB;
 
 class OrderItem extends Model
 {
@@ -46,6 +46,18 @@ class OrderItem extends Model
     public function order()
     {
         return $this->belongsTo('App\Models\Order', 'order_id');
+    }
+
+    public function getMostSoldItems(){
+
+        return DB::table('order_items')
+                ->join('items', 'order_items.item_code', '=', 'items.item_code')
+                ->select('items.item_name', 'order_items.item_code', DB::raw('count(*) as total_orders'))
+                ->groupBy('items.item_name', 'order_items.item_code')
+                ->orderBy('total_orders', 'desc')
+                ->limit(10)
+                ->get();
+
     }
 
 }
