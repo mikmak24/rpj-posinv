@@ -75,8 +75,10 @@
                                             <label for="inputSelect">Item Category</label>
                                             <select class="form-control" name="item_category" id="inputSelect">
                                                 <option value="" disabled selected>Choose your option</option>
-                                                <option value="1">Electrical</option>
-                                                <option value="2">Hand Tools</option>
+                                                @foreach ($categories as $category)
+                                                <option value='{!!$category->id!!}'>{!!$category->category_name!!}</option>
+                                                @endforeach
+
                                             </select>
                                         </div>
                                         
@@ -104,6 +106,7 @@
                                                 <th>Item Price</th>
                                                 <th>Item Quantity</th>
                                                 <th>Item Status</th>
+                                                <th>Item Category</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -127,6 +130,7 @@
                                             <td>{!!$item->item_price!!}</td>
                                             <td>{!!$item->item_quantity!!}</td>
                                             <td>{!!$item->item_status!!}</td>
+                                            <td>{!!$item->category->category_name!!}</td>
                                             <td><i class="material-icons ">update</i></td>
                                             <td><i class="material-icons">remove_circle</i></td>
                                         </tr>

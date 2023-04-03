@@ -49,7 +49,7 @@
                 <a class="nav-link text-white {{ $activePage == 'sales' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('sales') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">shopping_basket</i>
+                        <i class="material-icons opacity-10">add_circle</i>
                     </div>
                     <span class="nav-link-text ms-1">Sales</span>
                 </a>
@@ -60,7 +60,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">shopping_basket</i>
                     </div>
-                    <span class="nav-link-text ms-1">Orders</span>
+                    <span class="nav-link-text ms-1">Orders/Transactions</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -69,7 +69,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Items</span>
+                    <span class="nav-link-text ms-1">Item Management</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -78,7 +78,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Categories</span>
+                    <span class="nav-link-text ms-1">Category Management</span>
                 </a>
             </li>
 

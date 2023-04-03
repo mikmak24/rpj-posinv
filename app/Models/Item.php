@@ -59,8 +59,7 @@ class Item extends Model
     }
 
     public function getAllItems(){
-        $items = $this::all();
-        return $items;
+        return $this::with('category')->get();
     }
 
     
@@ -75,7 +74,12 @@ class Item extends Model
         }
 
         $item->update(['item_quantity' => $new_quantity]);
-
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class); // Define the "belongsTo" relationship to Category model
+    }
+
+   
 }
