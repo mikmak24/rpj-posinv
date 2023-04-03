@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class Item extends Model
 {
@@ -23,6 +24,11 @@ class Item extends Model
     protected $hidden = [
         'updated_at', 'created_at',
     ];
+
+    public function scopeFindByItemCode($query, $item_code)
+    {
+        return $query->where('item_code', $item_code);
+    }
 
     public function create($request){
         // Store the record
@@ -55,6 +61,21 @@ class Item extends Model
     public function getAllItems(){
         $items = $this::all();
         return $items;
+    }
+
+    
+    public function inventoryMovement($item_code, $quantity, $operation){
+        $item = $this::findByItemCode($item_code)->first();;
+        $current_quantity = $item->item_quantity;
+
+        if ($operation == 'subtract'){
+            $new_quantity = $current_quantity - $quantity;
+        } else {
+            $new_quantity = $current_quantity + $quantity;
+        }
+
+        $item->update(['item_quantity' => $new_quantity]);
+
     }
 
 }

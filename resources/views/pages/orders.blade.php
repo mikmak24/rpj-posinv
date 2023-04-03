@@ -22,149 +22,134 @@
                                     </button>
                             </div>
 
-
-                            <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0 " data-bs-toggle="modal" data-bs-target="#exampleModal" href="javascript:;">
-                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Items
-                            </a>
-                            </div>
-
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg " role="document">
-                                <div class="modal-content">
-                                <div class="modal-header bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h5 class="modal-title text-white" id="largeModalLabel">View Items</h5>
-                                </div>
-
-                                <div class="modal-body">
+                            <div class="card-body" style="position: relative;">
                                 <table id="dataTable">
                                         <thead>
                                             <tr>
-                                                <th></th>
-                                                <th>Item Code</th>
-                                                <th>Item Name</th>
-                                                <th>Item Description</th>
-                                                <th>Item Price</th>
-                                                <th>Item Quantity</th>
-                                                <th>Item Status</th>
+                                                <th>Order No</th>
+                                                <th>Order Date</th>
+                                                <th>Order Discount</th>
+                                                <th>Order Total</th>
+                                                <th>Payment Method</th>
+                                                <th>Payment Amount</th>
+                                                <th>Payment Change</th>
+                                                <th>Process By</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($items as $item)
-                                        <tr>
-                                            <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('storage/images/' . $item->item_image ) }}"
-                                                    class="avatar avatar-sm me-3 border-radius-lg"
-                                                    alt="user1">
+                                        @foreach ($orders as $order)
+                                            <tr>
+                                                <td>{!!$order->order_no!!}</td>
+                                                <td>{!!$order->order_date!!}</td>
+                                                <td>{!!$order->order_discount!!}</td>
+                                                <td>{!!$order->order_total!!}</td>
+                                                <td>{!!$order->payment_method!!}</td>
+                                                <td>{!!$order->payment_amount!!}</td>
+                                                <td>{!!$order->payment_change!!}</td>
+                                                <td>{!!$order->process_by!!}</td>
+                                                <td>
+
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#order-{{$order->id}}" aria-expanded="false" aria-controls="order-{{$order->id}}">
+                                                    <i class="material-icons">remove_red_eye</i>
+                                                </button>
+
+                                                <div id="order-{{$order->id}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne" data-bs-parent="#accordionPanelsStayOpenExample">
+                                                    <div class="accordion-body">
+                                                    <table class="table table-striped" id="orderItemsTable">
+                                                        <thead>
+                                                            <th scope="">Order Id</th>
+                                                            <th scope="col">Item Code</th>
+                                                            <th scope="col">Item Name</th>
+                                                            <th scope="col">Item Price</th>
+                                                            <th scope="col">Item Discount</th>
+                                                            <th scope="col">Item Quantity</th>
+                                                            <th scope="col">Item Total</th>
+                                                            <th></th>
+
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach ($order->items as $item)
+                                                        <tr>
+                                                        <td>{!!$item->id!!}</td>
+                                                        <td>{!!$item->item_code!!}</td>
+                                                        <td>{!!$item->item_name!!}</td>
+                                                        <td>{!!$item->item_price!!}</td>
+                                                        <td>{!!$item->item_discount!!}</td>
+                                                        <td>{!!$item->item_quantity!!}</td>
+                                                        <td>{!!$item->total!!}</td>
+
+
+
+
+
+                                                        </tr>
+
+                                                        @endforeach
+
+                                                    
+                                                        </tbody>
+                                                    </table>
+                                                    </div>
                                                 </div>
-                                                      
-                                            </div>
-                                            </td>
-                                            <td>{!!$item->item_code!!}</td>
-                                            <td>{!!$item->item_name!!}</td>
-                                            <td>{!!$item->item_description!!}</td>
-                                            <td>{!!$item->item_price!!}</td>
-                                            <td>{!!$item->item_quantity!!}</td>
-                                            <td>{!!$item->item_status!!}</td>
-                                            <td><button class="btn-details"  data-item="{{ $item }}" ><i class="material-icons ">add</i></button></td>
-                                            
-                                        </tr>
+                                                </td>
+                                                
+                                            </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
+                            </div>
+
+                      
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ordered Items</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+
+                
+
+                                        <table class="table table-striped" id="orderItemsTable">
+                                            <thead>
+                                                <th scope="">Order Id</th>
+                                                <th scope="col">Item Code</th>
+                                                <th scope="col">Item Name</th>
+                                                <th scope="col">Item Price</th>
+                                                <th scope="col">Item Discount</th>
+                                                <th scope="col">Item Quantity</th>
+                                                <th scope="col">Item Total</th>
+                                                <th></th>
+
+                                            </thead>
+                                            <tbody>
+                                          
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
                                 </div>
                                 </div>
-                            </div>
-                            </div>
-
-                            <div class="card-body">
-                                <table id="sales-table" class="striped table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Item Code</th>
-                                                <th>Item Name</th>
-                                                <th>Item Price</th>
-                                                <th>Item Discount</th>
-                                                <th>Quantity</th>
-                                                <th>Total</th>
-                                                <th class="text-secondary opacity-7"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        </tbody>
-                                    </table>
-                                 
-                            </div>
-
-                            <div class=" me-3 my-3 text-end">
-                                <button id="proceed" class="btn bg-gradient-dark mb-0" href="javascript:;">
-                                    <i class="material-icons text-sm">arrow_forward</i>&nbsp;&nbsp;Proceed
-                                </button>
-                            </div>
-
 
                         </div>
                     </div>  
-                </div>
-
-                <div class="col-lg-4 col-md-6 mt-4 mb-4" style="display: none;" id="payment_summary">
-                    <div class="card z-index-2 ">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-success shadow-primary border-radius-lg py-3 pe-1">
-                            <h5 class="text-white text-capitalize ps-3"> Payment Summary:</h5>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="mb-0 ">Order No: <input id="order_no" type="text" readonly class="form-control border border-2 p-2" ></h6>
-                            <hr class="dark horizontal">
-
-                            <h6 class="mb-0 ">Order Discount: <input type="text" class="form-control border border-2 p-2"  id="order_discount"></h6>
-                            <hr class="dark horizontal">
-
-                            <h6 class="mb-0 ">Order Date: <input type="text" readonly class="form-control border border-2 p-2"  id="order_date"></h6>
-                            <hr class="dark horizontal">
-
-                            <h6 class="mb-0 ">Order Total: <input type="text" readonly class="form-control border border-2 p-2"  id="order_total"></h6>
-                            <hr class="dark horizontal">
-
-                            <hr style="background-color:red;">
-
-                            <div style="display: none;" id="payment_change_error" class="container alert alert-danger alert-dismissible text-white mt-2 pl-4" role="alert">
-                                <span class="text-sm">Payment change must not be negative!</span>
-                                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                            <h6 class="mb-0 ">Payment Amount: <input type="text" class="form-control border border-2 p-2"  id="payment_amount"></h6>
-                            <hr class="dark horizontal">
-
-                            <h6 class="mb-0 ">Payment Change: <input type="text" class="form-control border border-2 p-2"  id="payment_change"></h6>
-                            <hr class="dark horizontal">
-                            <meta name="csrf-token" content="{{ csrf_token() }}">
-
-                            <div class=" me-3 my-3 text-end">
-                                <button id="bill" class="btn bg-gradient-dark mb-0" href="javascript:;">
-                                    <i class="material-icons text-sm">arrow_forward</i>&nbsp;&nbsp;Bill
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-         
+                </div>      
              
             </div>
         </main>
         <x-plugins></x-plugins>
 </x-layout>
-<script src="{{ asset('js/sales.js') }}"></script>
+<script src="{{ asset('js/orders.js') }}"></script>
 
 
 

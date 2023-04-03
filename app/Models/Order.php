@@ -41,4 +41,13 @@ class Order extends Model
         $order->save(); // Finally, save the record.
         return $order->id;
     }
+
+    public function items()
+    {
+        return $this->hasMany('App\Models\OrderItem', 'order_id');
+    }
+
+    public function getAllOrders(){
+        return $this::orderBy('created_at', 'desc')->get();
+    }
 }

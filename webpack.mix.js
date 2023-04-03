@@ -16,7 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/categories.js', 'public/js')
     .js('resources/js/datatable.js', 'public/js')
     .js('resources/js/sales.js', 'public/js')
-
+    .js('resources/js/orders.js', 'public/js')
 
     .postCss('resources/css/material-dashboard.css', 'public/css', [
         //

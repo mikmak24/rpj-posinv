@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Item;
 use Log;
 
 class OrderItem extends Model
@@ -38,5 +39,13 @@ class OrderItem extends Model
             "total" =>                 $items['item_total'],
         ]);
         $order->save(); // Finally, save the record.
+        $item = new Item();
+        $item->inventoryMovement( $items['item_code'], $items['item_quantity'], 'subtract');
     }
+
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Order', 'order_id');
+    }
+
 }
