@@ -33,9 +33,6 @@ class Order extends Model
             "order_discount" =>         $orderDetails['order_discount'],
             "order_date" =>             $orderDetails['order_date'],
             "order_total" =>            $orderDetails['order_total'],
-            "payment_method" =>         'Cash',
-            "payment_amount" =>         $orderDetails['payment_amount'],
-            "payment_change" =>         $orderDetails['payment_change'],
             "process_by" =>             auth()->user()->name
 
         ]);
@@ -48,8 +45,18 @@ class Order extends Model
         return $this->hasMany('App\Models\OrderItem', 'order_id');
     }
 
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    public function refund()
+    {
+        return $this->hasOne(Refund::class);
+    }
+
     public function getAllOrders(){
-        return $this::orderBy('created_at', 'desc')->get();
+        return $this::with('payment', 'refund')->orderBy('created_at', 'desc')->get();
     }
 
     public function getTodayOrdersCount(){

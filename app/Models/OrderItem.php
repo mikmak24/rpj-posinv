@@ -48,6 +48,14 @@ class OrderItem extends Model
         return $this->belongsTo('App\Models\Order', 'order_id');
     }
 
+    public function refund()
+    {
+        return $this->hasOne(Refund::class);
+    }
+
+
+
+
     public function getMostSoldItems(){
 
         return DB::table('order_items')

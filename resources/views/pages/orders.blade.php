@@ -34,7 +34,7 @@
                                                 <th>Payment Amount</th>
                                                 <th>Payment Change</th>
                                                 <th>Process By</th>
-                                                <th></th>
+                                                <th>Items Ordered</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -44,44 +44,63 @@
                                                 <td>{!!$order->order_date!!}</td>
                                                 <td>{!!$order->order_discount!!}</td>
                                                 <td>{!!$order->order_total!!}</td>
-                                                <td>{!!$order->payment_method!!}</td>
-                                                <td>{!!$order->payment_amount!!}</td>
-                                                <td>{!!$order->payment_change!!}</td>
+                                                <td>{!!$order->payment->payment_method!!}</td>
+                                                <td>{!!$order->payment->payment_amount!!}</td>
+                                                <td>{!!$order->payment->payment_change!!}</td>
                                                 <td>{!!$order->process_by!!}</td>
                                                 <td>
 
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#order-{{$order->id}}" aria-expanded="false" aria-controls="order-{{$order->id}}">
-                                                    <i class="material-icons">remove_red_eye</i>
+                                                    <i class="material-icons">arrow_drop_down_circle</i>
                                                 </button>
 
                                                 <div id="order-{{$order->id}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne" data-bs-parent="#accordionPanelsStayOpenExample">
                                                     <div class="accordion-body">
                                                     <table class="table table-striped" id="orderItemsTable">
                                                         <thead>
+                                                            <th></th>
                                                             <th scope="">Order Id</th>
-                                                            <th scope="col">Item Code</th>
-                                                            <th scope="col">Item Name</th>
-                                                            <th scope="col">Item Price</th>
-                                                            <th scope="col">Item Discount</th>
-                                                            <th scope="col">Item Quantity</th>
-                                                            <th scope="col">Item Total</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Discount</th>
+                                                            <th scope="col">Total</th>
                                                             <th></th>
 
                                                         </thead>
                                                         <tbody>
                                                         @foreach ($order->items as $item)
                                                         <tr>
-                                                        <td>{!!$item->id!!}</td>
-                                                        <td>{!!$item->item_code!!}</td>
+                                                        <td>
+                                                           
+                                                            <button id="btn-refund" type="button" class="btn btn-info btn-link"
+                                                                data-original-title="" title="">
+                                                                <i class="material-icons">assignment_returned</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+
+                                                            <button id="btn-refund-proceed" style="display:none" type="button" class="btn btn-success btn-link"
+                                                                data-original-title="" title="">
+                                                                <i class="material-icons">add</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+
+                                                            <button id="btn-refund-close" style="display:none" type="button" class="btn btn-danger btn-link"
+                                                                data-original-title="" title="">
+                                                                <i class="material-icons">close</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+
+                                                        </td>
+                                                        <td id="refund-item-orderId" style="display: none;">{!!$item->order_id!!}</td>
+                                                        <td id="refund-item-code">{!!$item->item_code!!}</td>
                                                         <td>{!!$item->item_name!!}</td>
+                                                        <td>
+                                                            <input id="refund-item-qty" type="number" readonly value='{!!$item->item_quantity!!}'></input>
+                                                        </td>
                                                         <td>{!!$item->item_price!!}</td>
                                                         <td>{!!$item->item_discount!!}</td>
-                                                        <td>{!!$item->item_quantity!!}</td>
                                                         <td>{!!$item->total!!}</td>
-
-
-
-
 
                                                         </tr>
 
