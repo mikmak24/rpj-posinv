@@ -50,21 +50,22 @@ $(document).ready(function () {
     });
   });
   $('#create-refund').on('submit', function (e) {
-    refundType = $('#refundType').val();
-    refundType = $('#refundType').val();
     e.preventDefault();
+    refundType = $('#refundType').val();
+    refundType = $('#refundType').val();
     $.ajax({
       url: '/create-refund',
       type: 'POST',
-      processData: false,
-      contentType: false,
+      processData: true,
+      contentType: 'application/x-www-form-urlencoded',
       data: {
         refundType: refundType,
         refundItemQty: refundItemQty,
         refundItemCode: refundItemCode,
         refundItemOrderId: refundItemOrderId,
         refundItemPaymentId: refundItemPaymentId,
-        refundItemOrderItemId: refundItemOrderItemId
+        refundItemOrderItemId: refundItemOrderItemId,
+        _token: $('meta[name="csrf-token"]').attr('content')
       },
       success: function success(response) {
         console.log(response);
