@@ -40,30 +40,30 @@
                                     <div class="row">       
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Item Name</label>
+                                            <label class="form-label">ITEM NAME:</label>
                                             <input type="text" name="item_name" class="form-control border border-2 p-2" >
                                         </div>
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Item Description</label>
+                                            <label class="form-label">ITEM DESCRIPTION:</label>
                                             <textarea type="text" name="item_description" class="form-control border border-2 p-2" ></textarea>
                                     
                                         </div>
                                     
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Item Price</label>
+                                            <label class="form-label">ITEM PRICE:</label>
                                             <input type="number" name="item_price" class="form-control border border-2 p-2">
                                         
                                         </div>
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Item Quantity</label>
+                                            <label class="form-label">ITEM QUANTITY:</label>
                                             <input type="number" name="item_quantity" class="form-control border border-2 p-2">
                                         
                                         </div>
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label for="inputSelect">Item Status</label>
+                                            <label for="inputSelect">ITEM STATUS:</label>
                                             <select class="form-control" name="item_status" id="inputSelect">
                                                 <option value="" disabled selected>Choose your option</option>
                                                 <option value="Active">Active</option>
@@ -72,7 +72,7 @@
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label for="inputSelect">Item Category</label>
+                                            <label for="inputSelect">ITEM CATEGORY:</label>
                                             <select class="form-control" name="item_category" id="inputSelect">
                                                 <option value="" disabled selected>Choose your option</option>
                                                 @foreach ($categories as $category)
@@ -83,7 +83,7 @@
                                         </div>
                                         
                                         <div class="mb-3 col-md-12">
-                                            <label class="form-label">Item Image</label>
+                                            <label class="form-label">ITEM IMAGE:</label>
                                             <input type="file" name="item_image" class="form-control border border-2 p-2">
                                         </div>
                                     </div>
