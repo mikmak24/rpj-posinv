@@ -59,7 +59,7 @@
                                                     <table class="table table-striped" id="orderItemsTable">
                                                         <thead>
                                                             <th></th>
-                                                            <th scope="">Order Id</th>
+                                                            <th scope="">Item Id</th>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Quantity</th>
                                                             <th scope="col">Price</th>
@@ -92,7 +92,10 @@
                                                             </button>
 
                                                         </td>
+                                                        <td id="refund-item-paymentId" style="display: none;">{!!$order->payment->id!!}</td>
                                                         <td id="refund-item-orderId" style="display: none;">{!!$item->order_id!!}</td>
+                                                        <td id="refund-item-orderItemId" style="display: none;">{!!$item->id!!}</td>
+
                                                         <td id="refund-item-code">{!!$item->item_code!!}</td>
                                                         <td>{!!$item->item_name!!}</td>
                                                         <td>
@@ -122,40 +125,28 @@
                       
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="view-modal-refunded-type" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ordered Items</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Select Refund Type</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+                                    <form id="create-refund">
+                                    @csrf
                                     <div class="modal-body">
-                                        <div class="table-responsive">
+                                    <select id="refundType" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="return">Return</option>
+                                        <option value="replacement">Replacement</option>
+                                    </select>
 
-                
-
-                                        <table class="table table-striped" id="orderItemsTable">
-                                            <thead>
-                                                <th scope="">Order Id</th>
-                                                <th scope="col">Item Code</th>
-                                                <th scope="col">Item Name</th>
-                                                <th scope="col">Item Price</th>
-                                                <th scope="col">Item Discount</th>
-                                                <th scope="col">Item Quantity</th>
-                                                <th scope="col">Item Total</th>
-                                                <th></th>
-
-                                            </thead>
-                                            <tbody>
-                                          
-                                            </tbody>
-                                        </table>
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button id="btn-refund-save" type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
+                                    </form>
                                     </div>
                                 </div>
                                 </div>

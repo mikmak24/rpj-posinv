@@ -21,6 +21,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\OrdersController;
+USE App\Http\Controllers\RefundController;
 
 
 Route::get('/', function () {
@@ -63,6 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/create-sales', [SalesController::class, 'create'])->name('/create-sales');
 
 	Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
+
+	Route::post('/create-refund', [RefundController::class, 'create'])->name('/create-refund');
+
 
 
 
