@@ -18,6 +18,7 @@ class Item extends Model
         'item_quantity',
         'item_status',
         'item_image',
+        'unit',
         'category_id'
     ];
 
@@ -39,7 +40,8 @@ class Item extends Model
             "item_price" =>         $request->item_price,
             "item_quantity" =>      $request->item_quantity,
             "item_status" =>        $request->item_status,
-            "item_image" =>         $request->file_name,
+            "unit" =>               $request->item_unit,
+            "item_image" =>         $request->file_name ?? 'NO IMAGE',
             "category_id" =>        $request->item_category
         ]);
         $item->save(); // Finally, save the record.

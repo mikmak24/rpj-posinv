@@ -62,7 +62,7 @@
                                         
                                         </div>
                                         
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-4">
                                             <label for="inputSelect">ITEM STATUS:</label>
                                             <select class="form-control" name="item_status" id="inputSelect">
                                                 <option value="" disabled selected>Choose your option</option>
@@ -71,7 +71,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-4">
                                             <label for="inputSelect">ITEM CATEGORY:</label>
                                             <select class="form-control" name="item_category" id="inputSelect">
                                                 <option value="" disabled selected>Choose your option</option>
@@ -79,6 +79,19 @@
                                                 <option value='{!!$category->id!!}'>{!!$category->category_name!!}</option>
                                                 @endforeach
 
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
+                                            <label for="inputSelect">ITEM UNIT:</label>
+                                            <select class="form-control" name="item_unit" id="inputSelect">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                <option value="PCS">PCS</option>
+                                                <option value="WEIGHT">WEIGHT</option>
+                                                <option value="BAG">BAG</option>
+                                                <option value="PACK">PACK</option>
+                                                <option value="METER">METER</option>
+                                                <option value="YARD">YARD</option>
                                             </select>
                                         </div>
                                         

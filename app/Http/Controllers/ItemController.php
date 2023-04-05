@@ -36,9 +36,10 @@ class ItemController extends Controller
             $file->storeAs('public/images', $filename);
 
             $request->request->add(['file_name' => $filename]); //add request
-            $request->request->add(['code' => $itemCode]); //add request
 
         }
+
+        $request->request->add(['code' => $itemCode]); //add request
 
         $this->item->create($request);
         
