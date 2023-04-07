@@ -1,0 +1,76 @@
+user
+-id
+-name 
+-email 
+-email_verified_at
+-phone
+-location
+-password
+-role_id
+
+role
+-id
+-role_name
+-role_description
+
+items
+-id
+-item_name
+-item_description
+-item_price
+-item_quantity
+-item_status
+-category_id (FK)
+
+category
+-id
+-category_name
+-category_description
+
+customer
+-id
+-customer_fname
+-customer_lname
+-customer_address
+-phone
+
+orders
+-id
+-order_no
+-order_discount
+-order_date
+-order_total
+-payment_method
+-payment_amount
+-payment_change
+
+order_items
+-id 
+-order_id
+-item_code
+-item_name
+-item_price
+-item_discount
+-item_quantity  
+
+payments
+-id
+-payment_method
+-payment_amount
+-payment_change
+-order_id ~FK
+-status = 'refunded/processed'
+
+refunds
+-id
+-payment_id FK
+-order_id FK
+
+-order_items_id FK
+-refunded_amount
+-refunded_type - return/replacement
+-reason
+-
+
+
+

@@ -1,0 +1,10 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/items.js": "/js/items.js",
+    "/js/categories.js": "/js/categories.js",
+    "/js/datatable.js": "/js/datatable.js",
+    "/js/sales.js": "/js/sales.js",
+    "/js/orders.js": "/js/orders.js",
+    "/css/material-dashboard.css": "/css/material-dashboard.css",
+    "/js/vendor.js": "/js/vendor.js"
+}
