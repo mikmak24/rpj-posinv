@@ -5,6 +5,7 @@
     "/js/datatable.js": "/js/datatable.js",
     "/js/sales.js": "/js/sales.js",
     "/js/orders.js": "/js/orders.js",
+    "/js/roles.js": "/js/roles.js",
     "/css/material-dashboard.css": "/css/material-dashboard.css",
     "/js/vendor.js": "/js/vendor.js"
 }
