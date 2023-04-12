@@ -33,4 +33,10 @@ class Role extends Model
     public function getAllRoles(){
         return $this::get();
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
 }

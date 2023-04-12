@@ -23,6 +23,8 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RefundController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
+
 
 
 
@@ -73,6 +75,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/user-roles', [RolesController::class, 'index'])->name('user-roles');
 	Route::post('/create-roles', [RolesController::class, 'create'])->name('/create-roles');
 
+	Route::get('/user-management', [UsersController::class, 'index'])->name('user-management');
+
+
+
+
 
 
 
@@ -98,9 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('static-sign-up', function () {
 		return view('pages.static-sign-up');
 	})->name('static-sign-up');
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
+	
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');

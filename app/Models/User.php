@@ -52,4 +52,14 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function getAllUsers()
+    {
+        return $this::with('role')->get();
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
 }
