@@ -7,7 +7,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Log;
 
@@ -25,7 +25,7 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        $this->role->create($request);
+        $this->user->create($request);
 
         return response()->json([
             'success' => true
@@ -33,10 +33,13 @@ class UsersController extends Controller
     }
 
     public function index(){
+
         $users = $this->user->getAllUsers();
+        $roles = $this->role->getAllRoles();
         
         return view('pages/users')->with([
             'users' => $users,
+            'roles' => $roles
         ]);
     }
 

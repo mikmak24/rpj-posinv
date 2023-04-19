@@ -23,11 +23,11 @@
                             <div class="modal-dialog modal-lg " role="document">
                                 <div class="modal-content">
                                 <div class="modal-header bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h5 class="modal-title text-white" id="largeModalLabel">Add New Items</h5>
+                                    <h5 class="modal-title text-white" id="largeModalLabel">Add New Users</h5>
                                 </div>
 
                                 <div style="display: none;" id="div-success" class="container alert alert-success alert-dismissible text-white mt-2 pl-4" role="alert">
-                                <span class="text-sm">New Item is added Successfully!</span>
+                                <span class="text-sm">New User is added Successfully!</span>
                                     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
                                         aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -35,19 +35,47 @@
                                 </div>
 
                                 <div class="modal-body">
-                                <form id="create-roles" enctype="multipart/form-data">
+                                <form id="create-users" enctype="multipart/form-data">
                                 @csrf
                                     <div class="row">       
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">ROLE NAME:</label>
-                                            <input type="text" name="role_name" class="form-control border border-2 p-2" >
+                                            <label class="form-label">NAME:</label>
+                                            <input type="text" name="name" class="form-control border border-2 p-2" >
                                         </div>
                                         
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">ROLE DESCRIPTION:</label>
-                                            <textarea type="text" name="role_description" class="form-control border border-2 p-2" ></textarea>
-                                    
+                                            <label class="form-label">EMAIL:</label>
+                                            <input type="text" name="email" class="form-control border border-2 p-2" ></textarea>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">LOCATION:</label>
+                                            <input type="text" name="location" class="form-control border border-2 p-2" ></textarea>
+                                        </div>
+
+                                        
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">PHONE:</label>
+                                            <input type="number" name="phone" value="09" class="form-control border border-2 p-2" ></textarea>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label for="inputSelect">USER ROLE:</label>
+                                            <select class="form-control" name="role" id="inputSelect">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach ($roles as $role)
+                                                <option value='{!!$role->id!!}'>{!!$role->role_name!!}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+
+
+                                        
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Password:</label>
+                                            <input type="password" name="password" value="09" class="form-control border border-2 p-2" ></textarea>
                                         </div>
                                     
                                     </div>
@@ -152,7 +180,7 @@
         </main>
         <x-plugins></x-plugins>
 </x-layout>
-<script src="{{ asset('js/roles.js') }}"></script>
+<script src="{{ asset('js/users.js') }}"></script>
 
 
 

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -25,7 +27,10 @@ class User extends Authenticatable
         'location',
         'phone',
         'about',
-        'password_confirmation'
+        'password_confirmation',
+        'role_id',
+        'email_verified_at',
+        'remember_token'
     ];
 
     /**
@@ -60,6 +65,22 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function create($request){
+        // Store the record
+        $user = new $this([
+            "name" =>           $request->name,
+            "email" =>          $request->email,
+            "password" =>       $request->password,
+            "location" =>       $request->location,
+            "phone" =>          $request->phone,
+            "role_id" =>        $request->role,
+            "remember_token" => Str::random(60),
+            "email_verified_at" => Carbon::now()
+
+        ]);
+        $user->save(); // Finally, save the record.
     }
 
 }

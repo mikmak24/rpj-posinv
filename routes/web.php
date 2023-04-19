@@ -75,12 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/user-roles', [RolesController::class, 'index'])->name('user-roles');
 	Route::post('/create-roles', [RolesController::class, 'create'])->name('/create-roles');
 
-	Route::get('/user-management', [UsersController::class, 'index'])->name('user-management');
-
-
-
-
-
+	Route::get('/user-management', [UsersController::class, 'index'])->name('user-management')->middleware('role:Admin,Super-Admin');
+	Route::post('/create-users', [UsersController::class, 'create'])->name('/create-users');
 
 
 
