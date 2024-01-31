@@ -9,8 +9,8 @@
                     <div class="col-12">
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h4 class="text-white text-capitalize ps-3"> SALES</h4>
+                                <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h5 class="text-white text-capitalize ps-3"> Sales</h5>
                                 </div>
                             </div>
 
@@ -20,14 +20,13 @@
                             </a>
                             </div>
 
-
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg " role="document">
                                 <div class="modal-content">
-                                <div class="modal-header bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h5 class="modal-title text-white" id="largeModalLabel">View Items</h5>
-                                </div>
+                                <div class="modal-header bg-gradient-info shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h5 class="modal-title text-white" id="largeModalLabel"></h5>
+                                </div>;
 
                                 <div class="modal-body">
                                 <table id="dataTable">
@@ -94,8 +93,8 @@
                             </div>
 
                             <div class=" me-3 my-3 text-end">
-                                <button id="proceed" class="btn bg-gradient-dark mb-0" href="javascript:;">
-                                    <i class="material-icons text-sm">arrow_forward</i>&nbsp;&nbsp;Proceed
+                                <button id="proceed" class="btn btn-sm bg-gradient-dark mb-0" href="javascript:;">
+                                    <i class="material-icons text-sm">arrow_forward</i>&nbsp;&nbsp;Refresh Payment Summary
                                 </button>
                             </div>
 
@@ -107,8 +106,8 @@
                 <div class="col-lg-4 col-md-6 mt-4 mb-4" style="display: none;" id="payment_summary">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
-                            <h5 class="text-white text-capitalize ps-3"> Payment Summary:</h5>
+                            <div class="bg-gradient-success shadow-primary border-radius-lg py-3 pe-1">
+                            <h6 class="text-white text-capitalize ps-3"> Payment Summary:</h6>
                             </div>
                         </div>
                         <div class="card-body">

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     var total = 0;
     var itemsOrdered = [];
     var order_no = 'ORD'+ Math.floor(Math.random() * 90000) + 10000;
@@ -10,30 +9,53 @@ $(document).ready(function() {
     var dateTime = date+' '+time;
     var orderTotal = 0;
 
-
     $('.btn-details').on('click', function(e) {
+        var data = $(this).data("item"); 
+        var itemCode = data.item_code;
+    
+        var existingRow = $("#sales-table td[name='item_code'][data-item_code='" + itemCode + "']").closest('tr');
+    
+        if (existingRow.length > 0) {
+            var quantityInput = existingRow.find('input[name="item_quantity"]');
+            var currentQuantity = parseInt(quantityInput.val(), 10);
+            quantityInput.val(currentQuantity + 1);
+    
+            // Update total
+            var totalPriceCell = existingRow.find('td[name="item_total"]');
+            var currentTotalPrice = parseFloat(totalPriceCell.text());
+            var newTotalPrice = currentTotalPrice + data.item_price;
+            totalPriceCell.text(newTotalPrice.toFixed(2));
 
-        var data = $(this).data("item"); // Get the name data attribute\
-        var newTable = $("<tr>");
-        var row = '<td name="item_code">'
-        +data.item_code+'</td><td>'
-        +data.item_name+'</td><td name="item_price">'
-        +data.item_price+'</td><td><input type="text" value="0" name="item_discount"></td><td name="itemquan"><input type="number" name="item_quantity" value="1"></td><td name="item_total" style="color: red;">'+data.item_price+'</td></tr>';
+            calculateAndDisplayTotal();
 
-        newTable.append(row);
-        $("#sales-table").append(newTable);
+        } else {
+            // Item does not exist, add a new row
+            var newTable = $("<tr>");
+            var row = '<td name="item_code" data-item_code="' + itemCode + '">'
+                + data.item_code + '</td><td>'
+                + data.item_name + '</td><td name="item_price">'
+                + data.item_price + '</td><td><input type="text" value="0" name="item_discount"></td><td name="itemquan"><input type="number" name="item_quantity" value="1"></td><td name="item_total" style="color: red;">' + data.item_price + '</td></tr>';
+    
+            newTable.append(row);
+            $("#sales-table").append(newTable);
+    
+            var myArray = {};
+            myArray['item_id'] = data.id;
+            myArray['item_code'] = data.item_code;
+            myArray['item_name'] = data.item_name;
+            myArray['item_price'] = data.item_price;
+            myArray['item_discount'] = 0;
+            myArray['item_quantity'] = 1;
+            myArray['item_total'] = data.item_price * 1;
+    
+            itemsOrdered.push(myArray);
 
-        var myArray = {};
-        myArray['item_code'] = data.item_code;
-        myArray['item_name'] = data.item_name;
-        myArray['item_price'] = data.item_price;
-        myArray['item_discount'] = 0;
-        myArray['item_quantity'] = 1;
-        myArray['item_total'] = data.item_price * 1;
+            calculateAndDisplayTotal();
 
-        itemsOrdered.push(myArray);
+        }
 
     });
+    
 
     $('table').on('change', 'input[name="item_quantity"]', function() {
         var row = $(this).closest('tr');
@@ -55,6 +77,8 @@ $(document).ready(function() {
         }
 
         row.find('td[name="item_total"]').text(total);
+        calculateAndDisplayTotal();
+      
 
     });
 
@@ -95,35 +119,29 @@ $(document).ready(function() {
     });
 
 
-    $('#proceed').click(function() {
-        var row = $(this).closest('tr');
-
-        for (var i = 0; i < itemsOrdered.length; i++) {
-            orderTotal += itemsOrdered[i].item_total;
-        }
-        $('#order_no').val('');
-        $('#order_date').val('');
-        $('#order_total').val('');
-
-        $('#order_no').val(order_no);
-        $('#order_date').val(dateTime);
-        $('#order_total').val(orderTotal);
-        $("#payment_summary").show();
+    $('#proceed').on('click', function() {
+        calculateAndDisplayTotal();
     });
 
 
-
     $('#order_discount').change(function() {
-        var order_total = orderTotal;
+
+        var total = 0;
+
+        $('#sales-table tbody tr').each(function() {
+            var totalCell = $(this).find('td[name="item_total"]');
+            var rowTotal = parseFloat(totalCell.text());
+            total += rowTotal;
+        });
+
+
+        var order_total =  total.toFixed(2);
         var order_discount = $('#order_discount').val();
 
-         //Check if the discount value is an integer followed by a percentage symbol
          if (order_discount.toString().endsWith('%')) {
-            // Extract the numeric value of the percentage and divide by 100
             order_discount = (parseInt(order_discount) / 100) * order_total;
             order_total = order_total - order_discount;
         } else {
-            // The discount value does not contain a percentage symbol, leave it as an integer
             order_discount = parseInt(order_discount);
             order_total = order_total - order_discount;
         }
@@ -199,6 +217,23 @@ $(document).ready(function() {
               }
             });
     });
+
+    function calculateAndDisplayTotal() {
+        var total = 0;
+    
+        $('#sales-table tbody tr').each(function() {
+            var totalCell = $(this).find('td[name="item_total"]');
+            var rowTotal = parseFloat(totalCell.text());
+            total += rowTotal;
+        });
+    
+        // Update elements with calculated values
+        $('#order_no').val(order_no);
+        $('#order_date').val(dateTime);
+        $('#order_total').val(total.toFixed(2));
+        $("#payment_summary").show();
+    }
+    
 
 
         

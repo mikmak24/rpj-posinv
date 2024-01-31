@@ -42,6 +42,12 @@ class RolesController extends Controller
         ]);
     }
 
+    public function delete(Request $request){
+        $id = $request->input('id');
+        $this->role::where('id', $id)->delete();
+        return back();
+    }
+
     
 
     

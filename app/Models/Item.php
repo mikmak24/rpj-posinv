@@ -66,7 +66,7 @@ class Item extends Model
 
     
     public function inventoryMovement($item_code, $quantity, $operation){
-        $item = $this::findByItemCode($item_code)->first();;
+        $item = $this::findByItemCode($item_code)->first();
         $current_quantity = $item->item_quantity;
 
         if ($operation == 'subtract'){
@@ -83,7 +83,9 @@ class Item extends Model
         return $this->belongsTo(Category::class); // Define the "belongsTo" relationship to Category model
     }
 
-    
-
+    public function inventoryAdjustments()
+    {
+        return $this->hasMany(InventoryAdjustment::class);
+    }
    
 }

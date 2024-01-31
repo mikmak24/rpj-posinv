@@ -32,9 +32,6 @@ Route::get('/', function () {
 	return redirect('sign-in');
 });
 
-
-
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
@@ -59,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 	//Get All Items
 	Route::get('/items', [ItemController::class, 'index'])->name('items');
 	Route::post('/create-items', [ItemController::class, 'create'])->name('/create-items');
+	Route::get('/edit-items/{id}', [ItemController::class, 'edit'])->name('edit-items');
+	Route::post('/update-items', [ItemController::class, 'update'])->name('update-items');
 
 
 	Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -74,9 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
 	//Get All Items
 	Route::get('/user-roles', [RolesController::class, 'index'])->name('user-roles');
 	Route::post('/create-roles', [RolesController::class, 'create'])->name('/create-roles');
+	Route::get('/delete-roles', [RolesController::class, 'delete'])->name('delete-roles');
 
 	Route::get('/user-management', [UsersController::class, 'index'])->name('user-management')->middleware('role:Admin,Super-Admin');
 	Route::post('/create-users', [UsersController::class, 'create'])->name('/create-users');
+	Route::get('/delete-users', [UsersController::class, 'delete'])->name('delete-users');
 
 
 

@@ -5,17 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\InventoryAdjustment;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use Log;
 
 class ItemController extends Controller
 {
     protected $item;
     protected $category;
-    public function __construct()
+    protected $inventoryAdjustment;
+
+    public function __construct(
+        InventoryAdjustment $inventoryAdjustment
+    )
     {
         $this->item = new Item();
         $this->category = new Category();
+        $this->inventoryAdjustment = $inventoryAdjustment;
 
     }
 
@@ -60,6 +67,62 @@ class ItemController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function edit($id){
+        $item = $this->item::with('category')->find($id);
+        $categories = $this->category->getAllCategories();
+        $adjustments = $this->inventoryAdjustment::where('item_id', $id)
+        ->orderBy('adjustment_date', 'desc')
+        ->paginate(10);
+
+        return view('pages/items/edit')->with([
+            'item' => $item,
+            'categories' => $categories,
+            'adjustments' => $adjustments
+        ]);    
+    }
+
+    public function update(Request $request){
+
+        if($request->prev_item_quantity > $request->item_quantity){
+            $adjustment_type = 'out';
+        } else if ($request->prev_item_quantity < $request->item_quantity) {
+            $adjustment_type = 'in';
+        } else {
+            $adjustment_type = '--';
+        }
+
+        $this->item::updateOrCreate(
+            [
+                'id' => $request->id
+            ],
+            [
+                "item_name" => $request->item_name,
+                "item_description" => $request->item_description,
+                "item_price" => $request->item_price,
+                "item_quantity" => $request->item_quantity,
+                "item_status" => $request->item_status,
+                "item_category" => $request->item_category,
+                "item_unit" => $request->item_unit
+            ]
+        );
+
+        
+        $this->inventoryAdjustment::create([
+            'item_id' => $request->id,
+            'adjustment_type' => $adjustment_type,
+            'quantity' => $request->item_quantity,
+            'reason' => 'modify',
+            'adjustment_date' => Carbon::now()->timestamp,
+            'adjusted_by' => auth()->user()->name
+        ]);
+
+        return back();
+    }
+
+
+   
+
 
     
 

@@ -10,9 +10,7 @@
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-2 font-weight-bold text-white">RPJ Hardware POSINV</span>
         </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+
         <ul class="navbar-nav">
 
             <li class="nav-item mt-3">
@@ -123,5 +121,6 @@
           
         </ul>
     </div>
+  
    
 </aside>

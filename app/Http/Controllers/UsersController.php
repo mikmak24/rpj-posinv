@@ -43,6 +43,12 @@ class UsersController extends Controller
         ]);
     }
 
+    public function delete(Request $request){
+        $id = $request->input('id');
+        $this->user::where('id', $id)->delete();
+        return back();
+    }
+
     
 
     

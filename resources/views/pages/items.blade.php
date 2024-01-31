@@ -9,7 +9,7 @@
                     <div class="col-12">
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
                                     <h6 class="text-white text-capitalize ps-3"> ITEMS</h6>
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg " role="document">
                                 <div class="modal-content">
-                                <div class="modal-header bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <div class="modal-header bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
                                     <h5 class="modal-title text-white" id="largeModalLabel">Add New Items</h5>
                                 </div>
 
@@ -120,7 +120,7 @@
                                                 <th>Item Quantity</th>
                                                 <th>Item Status</th>
                                                 <th>Item Category</th>
-                                                <th></th>
+                                                <th>Action</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -144,8 +144,9 @@
                                             <td>{!!$item->item_quantity!!}</td>
                                             <td>{!!$item->item_status!!}</td>
                                             <td>{!!$item->category->category_name!!}</td>
-                                            <td><i class="material-icons ">update</i></td>
-                                            <td><i class="material-icons">remove_circle</i></td>
+                                            <td>
+                                                <a class="btn btn-warning" href="{{ route('edit-items', ['id' => $item->id]) }}"> <i class="material-icons">edit</i> Edit</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                         </tbody>
